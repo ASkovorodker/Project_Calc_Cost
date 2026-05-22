@@ -1,0 +1,20 @@
+# ============================================================
+# Project Calc — dev-зависимости.
+#
+# Установка:
+#     pip install -r requirements-dev.txt
+#
+# Подтягивает всё из requirements.txt (production) плюс инструменты,
+# которые в release-сборке не нужны: PyInstaller для упаковки exe,
+# и любые другие сугубо dev-утилиты, которые появятся позже.
+#
+# Парсер сам по себе НЕ требует доп. зависимостей — он использует
+# openpyxl/sentence-transformers/faiss из requirements.txt. Поэтому
+# здесь только сборщик.
+# ============================================================
+
+-r requirements.txt
+
+# ----- Сборка релиза -----
+
+pyinstaller>=6.0            # упаковка project_calc.generator в calculator.exe (Этап Д)

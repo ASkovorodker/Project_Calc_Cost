@@ -1,0 +1,78 @@
+# ============================================================
+# Project Calc — production-зависимости (то, что идёт в exe).
+#
+# Установка:
+#     pip install -r requirements.txt
+#
+# Все версии зафиксированы через ==-пиннинг для воспроизводимой
+# сборки. Менять версии и состав без явной необходимости не нужно —
+# это влияет на размер и стабильность calculator.exe.
+#
+# Структура:
+#   1. Прямые зависимости — то, что project_calc реально импортирует.
+#   2. Транзитивные — подтянутые pip'ом из прямых; перечислены явно
+#      для воспроизводимости (полный pin-freeze).
+#
+# Как пересобрать pin-freeze при обновлении:
+#   1. Удалить .venv, создать заново, активировать.
+#   2. pip install <прямые-зависимости-без-версий>
+#   3. pip freeze > requirements.txt
+#   4. Восстановить эту шапку и структуру вручную.
+#
+# Замечание про torch: в проекте используется CPU-сборка (torch==X+cpu).
+# Это намеренно — у пользователя нет GPU, CUDA-вариант раздул бы exe
+# в 3-4 раза. При обновлении проверяйте, что суффикс +cpu сохранился.
+# ============================================================
+
+# ----- 1. Прямые зависимости project_calc -----
+
+openpyxl==3.1.5             # чтение и запись xlsx (parser/excel, generator/excel_generator)
+pandas==3.0.0               # чтение input.xlsx (generator/input_reader)
+numpy==2.4.2                # эмбеддинги, FAISS-векторы
+faiss-cpu==1.13.2           # векторный индекс оборудования (common/retrieval, parser/index_builder)
+sentence-transformers==5.2.3 # ML-модель multilingual-e5-base (common/retrieval/embedder)
+torch==2.10.0+cpu           # backend для sentence-transformers; CPU-сборка обязательна
+
+# ----- 2. Транзитивные зависимости (полный pin-freeze) -----
+
+annotated-doc==0.0.4
+anyio==4.12.1
+certifi==2026.1.4
+click==8.3.1
+et_xmlfile==2.0.0
+filelock==3.20.0
+fsspec==2025.12.0
+h11==0.16.0
+hf-xet==1.2.0
+httpcore==1.0.9
+httpx==0.28.1
+huggingface_hub==1.4.1
+idna==3.11
+Jinja2==3.1.6
+joblib==1.5.3
+markdown-it-py==4.0.0
+MarkupSafe==3.0.2
+mdurl==0.1.2
+mpmath==1.3.0
+networkx==3.6.1
+packaging==26.0
+Pygments==2.19.2
+python-dateutil==2.9.0.post0
+python-dotenv==1.2.1
+PyYAML==6.0.3
+regex==2026.2.19
+rich==14.3.3
+safetensors==0.7.0
+scikit-learn==1.8.0
+scipy==1.17.0
+setuptools==70.2.0
+shellingham==1.5.4
+six==1.17.0
+sympy==1.14.0
+threadpoolctl==3.6.0
+tokenizers==0.22.2
+tqdm==4.67.3
+transformers==5.2.0
+typer==0.24.1
+typer-slim==0.24.0
+typing_extensions==4.15.0
