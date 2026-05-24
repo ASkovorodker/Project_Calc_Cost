@@ -177,7 +177,7 @@ flowchart LR
 
     PREP -->|при релизе B| PKG
     PKG --> DELIVER
-    PREP -->|при релизе A<br/>(берём только 3 файла)| ZIPA
+    PREP -->|"при релизе A<br/>(берём только 3 файла)"| ZIPA
 
     SUPP["📋 Вспомогательные:<br/>download_model.py — раз на dev<br/>check_db.py — проверка содержимого<br/>calibrate_confidence.py — настройка порогов"]
 
